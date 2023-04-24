@@ -20,15 +20,18 @@ redirect_uri = 'http://localhost:8888/callback/' #Not using this though
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-#5 This function will search tracks based on your input
+#Enter some keywords to find artists
+keyword = str(input("Please enter some keywords to find artists"))
+results = sp.search(q=keyword, type='artist', limit=10)
+#print(results)
+for artist in results['artists']['items']:
+    print(artist['name'], '-', artist['id'])
 
-limit = 10
-keyword = str(input("Please enter some keywords to search tracks"))
-results = sp.search(q=keyword, type='track', limit=10)
-
-count = 0
+    
+#limit=10
+"""count = 0
 while count < limit:
     for artist in results['tracks']['items'][count]['artists']:
         print(artist['id'])
         print(artist['name'])
-        count += 1
+        count += 1"""
